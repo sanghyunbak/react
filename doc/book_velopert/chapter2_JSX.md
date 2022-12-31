@@ -1,14 +1,15 @@
+
 ## 2. JSX
 ---
 JSX는 자바스크립트의 확장 문법으로 XML과 매우 비슷하게 생겼습니다.
 위 코드는 번들링 과정에서 바벨을 사용하여 일반 자바스크립트 형태의 코드로 변환 됩니다. (번들링은 webpack을 이용하는데 그 과정 내에서 바벨을 사용하나보다.)
 ```jsx title="hello react"
-function App() {  
-    return (  
-        <div>  
-            Hello <b>react</b>  
-        </div>  
-    )  
+function App() {
+  return (
+      <div>
+        Hello <b>react</b>
+      </div>
+  )
 }
 ```
 
@@ -24,7 +25,7 @@ function App() {
 </blockquote>
 
 위와 같이 컴포넌트 렌더링 시 JSX가 아닌 `React.createElement` 함수를 사용해야 한다면 매우 불편할 것입니다.
->  ####  그러면 JSX도 자바스크립트 문법이라고 할 수 있나요❓
+>  ####  **그러면 JSX도 자바스크립트 문법이라고 할 수 있나요❓**
 > JSX는 리엑트에서 프로젝트를 개발할 때 사용되므로 공식적인 자바스크립트 문법은 아닙니다.
 > 바벨은 preset 및 plugin을 설정해서 개발자들이 임의로 만든 문법, 혹은 차기 자바스크립트의 문법들을 사용할 수 있습니다.
 
@@ -134,7 +135,10 @@ export default App;
 >  `const`는 ES6에서 도입 되었으며 한번 지정 후에는 변경이 불가능한 상수를 선언할 때 사용합니다.
 >  이전 버전에서는 `var`를 사용하여 변수를 선언 했지만 var의 경우 변수의 범위가 함수여서 문제가 좀 있었습니다.
 >  `let`의 경우 변수의 범위가 블록 단위이기 때문에 햇갈릴 일이 많이 없어서 대부분 let을 사용합니다.
+
+
 <blockquote>
+
 ```javascript
 function myFunctionVar() {  
   var a = 'hello';  
@@ -190,7 +194,7 @@ export default App;
 ```javascript
 function App() {  
   const name = '뤼엑트';  
-  return <div>{name === '리엑트' ? <h1>리엑트 입니다.</h1> ? null}</div>;  
+  return <div>{name === '리엑트' ? <h1>리엑트 입니다.</h1> : null}</div>;
 }  
   
 export default App;
@@ -312,17 +316,17 @@ input 태그 같은 경우는 html에서는 닫지 않아도 됩니다.
 JSX의 경우에 닫지 않는 경우에 오류가 발생합니다.
 태그 사이에 값이 없는 경우에는 다음과 같이 작성할 수 있습니다.
 ```javascript
-import "add_css.css";  
-  
-function AppSelfClosing() {  
-  const name = "리엑트";  
-  
-  return (  
-    <>  
-      <div className="react">{name}</div>  
-      <input />  
-    </>  
-  );  
+import "add_css.css";
+
+function AppSelfClosing() {
+  const name = "리엑트";
+
+  return (
+      <>
+        <div className="react">{name}</div>
+        <input />
+      </>
+  );
 }
 ```
 

@@ -4,12 +4,12 @@
 JSX는 자바스크립트의 확장 문법으로 XML과 매우 비슷하게 생겼습니다.
 위 코드는 번들링 과정에서 바벨을 사용하여 일반 자바스크립트 형태의 코드로 변환 됩니다. (번들링은 webpack을 이용하는데 그 과정 내에서 바벨을 사용하나보다.)
 ```jsx title="hello react"
-function App() {
-  return (
-      <div>
-        Hello <b>react</b>
-      </div>
-  )
+function App() {  
+    return (  
+        <div>  
+            Hello <b>react</b>  
+        </div>  
+    )  
 }
 ```
 
@@ -136,7 +136,6 @@ export default App;
 >  이전 버전에서는 `var`를 사용하여 변수를 선언 했지만 var의 경우 변수의 범위가 함수여서 문제가 좀 있었습니다.
 >  `let`의 경우 변수의 범위가 블록 단위이기 때문에 햇갈릴 일이 많이 없어서 대부분 let을 사용합니다.
 
-
 <blockquote>
 
 ```javascript
@@ -146,20 +145,20 @@ function myFunctionVar() {
     var a = "bye";  
     console.log(a);  
   }  
-
-console.log(a)  
+  
+  console.log(a)  
 }  
 console.log("😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎")  
-myFunctionVar() // var키워드는 scope이 합수 단위라 bye, bye 가 출력 됨
-
+myFunctionVar() // var키워드는 scope이 합수 단위라 bye, bye 가 출력 됨  
+  
 function myFunctionLet() {  
-let a = 'hello';  
-if (true) {  
-let a = "bye";  
-console.log(a);  
-}
-
-console.log(a)  
+  let a = 'hello';  
+  if (true) {  
+    let a = "bye";  
+    console.log(a);  
+  }  
+  
+  console.log(a)  
 }  
 console.log("😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀")  
 myFunctionLet() // let 키워드는 scope이 bye, hello가 출력 됨
@@ -316,17 +315,17 @@ input 태그 같은 경우는 html에서는 닫지 않아도 됩니다.
 JSX의 경우에 닫지 않는 경우에 오류가 발생합니다.
 태그 사이에 값이 없는 경우에는 다음과 같이 작성할 수 있습니다.
 ```javascript
-import "add_css.css";
-
-function AppSelfClosing() {
-  const name = "리엑트";
-
-  return (
-      <>
-        <div className="react">{name}</div>
-        <input />
-      </>
-  );
+import "add_css.css";  
+  
+function AppSelfClosing() {  
+  const name = "리엑트";  
+  
+  return (  
+    <>  
+      <div className="react">{name}</div>  
+      <input />  
+    </>  
+  );  
 }
 ```
 

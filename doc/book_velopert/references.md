@@ -1,0 +1,1 @@
+- [google style guide](https://google.github.io/styleguide/docguide/style.html#inline)

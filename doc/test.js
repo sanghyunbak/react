@@ -1,3 +1,18 @@
+const MyComponent = props => {
+  return <div>안녕하세요, 제 이름은 {props.name} 입니다.</div>
+}
+
+export default MyComponent;
+
+
+
+import Mycomponent from `./MyComponent`;
+
+const App = () => {
+  return <Mycomponent />
+};
+
+export default App;
 
 function App() {
     const name = 'React';
@@ -43,3 +58,6 @@ function App2() {
 }
 
 
+setTimeout(() => {
+  console.log('hello world');
+}, 1000);

@@ -296,3 +296,210 @@ export default MyComponent;
 props 이름도 나오지 않았지만 이렇게 잘 사용할 수 있습니다. 앞으로는 비구조화 할당 문법을 사용합니다.
 
 #### 3.3.6 propTypes를 통한 props 검증
+---
+필수 props를 지정하거나 타입(type)을 지정할 때 protoTypes를 사용, 이를 위해 import 구문을 사용하여 불러와야 합니다.
+```javascript
+import PropTypes from 'prop-types';
+
+const MyComponent = ({name, children}) => {
+  (...)
+};
+
+MyComponent.defaultProps = {
+  name: '기본 이름',
+};
+
+MyComponent.propTypes = {
+  name: PropTypes.string
+};
+```
+
+이러면 name은 무조건 문자열(string) 형태로 전달해야 된다는 것을 의미합니다.
+아래와 같이 일치하는 타입이 아닌 값을 전달하면 브라우저에서 에러를 보여줍니다.
+```javascript
+import MyComponent from "./props";  
+  
+const App = () => {  
+  return <MyComponent name={3}>리엑트</MyComponent>; //3을 넣을 때 따옴표가 아닌 {}
+};  
+  
+export default App;
+```
+
+#### 3.3.6.1 isRequired를 사용하여 필수 propTypes 설정
+---
+propTypes를 지정하지 않았을 때 경고 메시지를 띄워 주는 작업을 해 봅시다.
+propTypes를 지정할 때 뒤에 isRequired를 붙여 주면 됩니다.
+```javascript
+import PropTypes from 'prop-types';  
+  
+const MyComponent = ({name, favoriteNumber, children}) => {  
+  return (  
+      <div>  
+        안녕하세요, 제 이름은 {name}입니다. <br/>  
+        children 값은 {children}입니다.  
+        <br/>  
+        제가 좋아하는 숫자는 {favoriteNumber}입니다.  
+      </div>  
+  );  
+};  
+  
+MyComponent.defaultProps = {  
+  name: '기본 이름',  
+};  
+  
+MyComponent.propTypes = {  
+  name: PropTypes.string,  
+  favoriteNumber: PropTypes.number.isRequired,  
+};  
+  
+export default MyComponent;
+```
+
+앞서 정의한 App.js를 보면 favoriteNumber를 정의하지 않았기 때문에 브라우저에서 경고 메시지를 생성하는 것을 볼 수 있습니다. 아래와 같이 값을 지정한다면 경고 없이 출력되는 것을 볼 수 있습니다.
+
+```javascript
+import MyComponent from './MyComponent';  
+  
+const App = () => {  
+  return (  
+      <MyComponent name="React" favoriteNumber={1}>  
+        리엑트  
+      </MyComponent>  
+  );  
+};  
+  
+export default App;
+```
+
+##### 3.3.6.2 더 많은 PropTypes 종류
+---
+- array
+- arrayOf
+- bool
+- func
+- number
+- object
+- string
+- symbol
+- node
+- instanceOf
+- oneOf
+- oneOfType
+- objectOf
+- shape
+- any
+
+더 많은 정보는 https://github.com/facebook/prop-types 에서 볼 수 있습니다.
+
+#### 3.3.7 클래스형 컴포넌트에서 props 사용하기
+---
+클래스형 컴포넌트에서 props를 사용하려면 this.props를 조회하면 됩니다.
+
+```javascript
+import { Component } from "react";  
+import PropTypes from "prop-types";  
+  
+class MyComponent extends Component {  
+  render() {  
+    const { name, favoriteNumber, children } = this.props; //destructuring assignment  
+    return (  
+      <div>  
+        안녕하세요, 제 이름은 {name}입니다. <br />  
+        children 값은 {children}입니다.  
+        <br />  
+        제가 좋아하는 숫자는 {favoriteNumber}입니다.  
+      </div>  
+    );  
+  }  
+}  
+  
+MyComponent.defaultProps = {  
+  name: "기본 이름",  
+};  
+  
+MyComponent.propTypes = {  
+  name: PropTypes.string,  
+  favoriteNumber: PropTypes.number.isRequired,  
+};  
+  
+export default MyComponent;**
+```
+
+클래스형 컴포넌트에서는 defaultProps와 propTypes를 설정할 때 class 내부에서 지정하는 것도 가능합니다.
+
+```javascript
+import { Component } from "react";  
+import PropTypes from "prop-types";  
+  
+class MyComponent extends Component {  
+  static defaultProps = {  
+    name: "기본 이름",  
+  };  
+  
+  static propTypes = {  
+    name: PropTypes.string,  
+    favoriteNumber: PropTypes.number.isRequired,  
+  };  
+  
+  render() {  
+    const { name, favoriteNumber, children } = this.props; //destructuring assignment  
+    return (  
+      <div>  
+        안녕하세요, 제 이름은 {name}입니다. <br />  
+        children 값은 {children}입니다.  
+        <br />  
+        제가 좋아하는 숫자는 {favoriteNumber}입니다.  
+      </div>  
+    );  
+  }  
+}  
+  
+export default MyComponent;
+```
+
+> **defaultProps와 propTypes는 꼭 사용해야 하나요?**
+> 그렇지는 않습니다. 선택사항입니다.
+
+<br />
+
+### 3.4 state
+---
+state는 컴포넌트 내부에서 바뀔 수 있는 값을 의미합니다. props의 경우 부모 컴포넌트가 설정하는 값이며 컴포넌트 자신은 해당 props를 읽기 전용으로만 사용할 수 있습니다.
+리엑트에서는 두 가지 종류의 `state`가 있습니다.
+하나는 클래스형 컴포넌트가 지니고 있는 `state`이고 다른 하나는 함수 컴포넌트에서 `useState`라는 함수를 사용하는 state
+
+#### 3.4.1 클래스형 컴포넌트의 state
+---
+```javascript
+import React, {Component} from 'react';  
+  
+class ClassComponentState extends Component {  
+  constructor(props) {  
+    super(props);  
+    //state의 초깃값 설정하기  
+    this.state = {  
+      number: 0  
+    };  
+  }  
+  render() {  
+    const { number } = this.state; // state 조회 시 this.state로 조회 합니다.  
+    return (  
+        <div>  
+          <h1>{number}</h1>  
+          <button  
+          // onClick을 통해 버튼이 클릭되었을 때 호출할 함수를 지정합니다.  
+              onClick={() => {  
+                // this.setState를 사용하여 state에 새로운 값을 넣을 수 있습니다.  
+                this.setState({ number: number + 1});  
+              }}  
+          >  
+            +1  
+          </button>  
+        </div>  
+    );  
+  }  
+}  
+  
+export default ClassComponentState;
+```

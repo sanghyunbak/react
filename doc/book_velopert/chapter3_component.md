@@ -281,7 +281,7 @@ export default MyComponent;
 ```
 
 
-구조 분해 문법이라고도 불린다. 함수 파라미터에서도 쓰일 수 있다.
+구조 분해 문법이라고도 불립니다. 함수 파라미터에서도 쓰일 수 있습니다.
 
 ```javascript
 const MyComponent = ({ name, children }) => {  
@@ -477,7 +477,7 @@ export default MyComponent;
 ---
 state는 컴포넌트 내부에서 바뀔 수 있는 값을 의미합니다. props의 경우 부모 컴포넌트가 설정하는 값이며 컴포넌트 자신은 해당 props를 읽기 전용으로만 사용할 수 있습니다.
 리엑트에서는 두 가지 종류의 `state`가 있습니다.
-하나는 클래스형 컴포넌트가 지니고 있는 `state`이고 다른 하나는 함수 컴포넌트에서 `useState`라는 함수를 사용하는 state
+하나는 클래스형 컴포넌트가 지니고 있는 `state`이고 다른 하나는 함수 컴포넌트에서 `useState`입니다.
 <br />
 
 #### 3.4.1 클래스형 컴포넌트의 state
@@ -516,7 +516,7 @@ export default ClassComponentState;
 ```
 > **Rule**
 > 1. constructor를 작성할 때는 반드시 super(props)를 호출해 주어야 합니다.
-     > 	1. 근데... constuctor를 안써주어도 됨
+>> - 근데... constuctor를 안써주어도 됨
 > 2. state는 객체 형식이어야 합니다.
 > 3. 참조는 `this.state`와 같이 this에서 변수를 참조할 수 있습니다.
 

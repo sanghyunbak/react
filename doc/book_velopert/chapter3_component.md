@@ -146,7 +146,7 @@ function WhiteDoc() {
 const whitedoc = WhiteDoc();  
 whitedoc.bark();
 ```
-
+⭐️ 함수 내 함수를 바로 정의 하지 않고 리턴 객체에 담아 줍니다.
 일반함수(function 키워드를 사용해서 정의한 함수)의 경우 자신이 종속된 객체를 this로 가리키며, 화살표함수는 자신이 종속된 인스턴스를 가리킵니다.
 
 </blockquote>

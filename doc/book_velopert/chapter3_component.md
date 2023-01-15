@@ -503,3 +503,261 @@ class ClassComponentState extends Component {
   
 export default ClassComponentState;
 ```
+> **Rule**
+> 1. constructor를 작성할 때는 반드시 super(props)를 호출해 주어야 합니다.
+     > 	1. 근데... constuctor를 안써주어도 됨
+> 2. state는 객체 형식이어야 합니다.
+> 3. 참조는 `this.state`와 같이 this에서 변수를 참조할 수 있습니다.
+
+```javascript
+import { Component } from 'react';  
+  
+class StateTest extends Component {  
+  constructor(props) {  
+    super(props);  
+    this.state = {  
+      number: 0,  
+      fixedNumber: 0  
+    }  
+  }  
+  
+  render() {  
+    const {number, fixedNumber} = this.state;  
+    return (  
+        <div>  
+          <h1>{number}</h1>  
+          <h2>바뀌지 않는 값: {fixedNumber}</h2>  
+          <button  
+            // onClick을 통해 버튼이 클릭되었을 때 호출할 함수를 지정합니다.  
+            onClick={() => {  
+              this.setState({number: number + 1});  
+            }}  
+          >  
+           +1  
+          </button>  
+        </div>  
+    );  
+  }  
+};  
+  
+export default StateTest;
+```
+
+현재 state 안에 fixedNumber값이 추가 되었습니다.
+<br />
+
+##### 3.4.1.2 state를 constructor에서 꺼내기
+---
+```javascript
+import {Component} from 'react';  
+  
+class StateTestWithoutConstructor extends Component {  
+  
+  state = {  
+    number: 0,  
+    fixedNumber: 0,  
+  };  
+  
+  render() {  
+    const {number, fixedNumber} = this.state;  
+    return (  
+        <div>  
+          <h1>State without constructor</h1>  
+          <h1>{number}</h1>  
+          <h2>바뀌지 않는 값: {fixedNumber}</h2>  
+          <button  
+              // onClick을 통해 버튼이 클릭되었을 때 호출할 함수를 지정합니다.  
+              onClick={() => {  
+                this.setState({number: number + 1});  
+              }}  
+          >  
+            +1  
+          </button>  
+        </div>  
+    );  
+  }  
+};  
+  
+export default StateTestWithoutConstructor;
+```
+
+<br />
+
+##### 3.4.1.3 this.setState에 객체 대신 함수 인자 전달하기
+---
+
+
+setState인자로 객체를 넘겨 줄 경우 Async한 동작을 하게 되지만, 인자로 함수를 넘겨주는 경우 Sync한 동작을 수행하게 됩니다. 이때는 아래와 같은 형태의 코드가 됩니다.
+```javascript
+this.setState((prevState, props) => {
+  return {
+    // 업데이트하고 싶은 내용
+  }
+})
+```
+
+아래와 같이
+```javascript
+import {Component} from 'react';  
+  
+class SyncSetStateWithArrowFunction extends Component {  
+  state = {  
+    number: 0,  
+    fixedNumber: 0,  
+  };  
+  
+  render() {  
+    const {number, fixedNumber} = this.state;  
+    return (  
+        <div>  
+          <h1>State without constructor</h1>  
+          <h1>{number}</h1>  
+          <h2>바뀌지 않는 값: {fixedNumber}</h2>  
+          <button  
+              // onClick을 통해 버튼이 클릭되었을 때 호출할 함수를 지정합니다.  
+              onClick={() => {  
+                this.setState({number: number + 1});  
+                this.setState({number: this.state.number + 1});  
+              }}  
+          >  
+            +1 (Async version)  
+          </button>  
+  
+          <button  
+              onClick={() => {  
+                this.setState(prevState => {  
+                  return {  
+                    number: prevState.number + 1  
+                  };  
+                });  
+				// 위 코드와 아래 코드는 완전히 동일한 기능을 하는 코드 입니다.
+				// 화살표 함수에서 반환을 바로 하고 싶다면 {}를 없애면 됩니다.
+				// 아래는 객체를 ()로 감싸서 객체인 {} 밖에 ()로 감싼 형태 입니다.
+                this.setState(prevState => ({  
+                  number: prevState.number + 1  
+                }));  
+              }}  
+          >  
+            +1 (Sync version)  
+          </button>  
+        </div>  
+    );  
+  }  
+};  
+  
+export default SyncSetStateWithArrowFunction;
+```
+
+<br />
+
+##### 3.4.1.4 this.setState가 끝난 후 특정 작업 실행하기
+---
+콜백함수를 두번 째 파라미터로 제공하기 때문에 해당 인자 값을 넣으면 setState로 값을 업데이트한 이후에 특정 작업을 처리할 수 있습니다.
+
+```javascript
+import {Component} from 'react';  
+  
+class CallBack extends Component {  
+  state = {  
+    number: 0,  
+    fixedNumber: 0,  
+  };  
+  
+  render() {  
+    const {number, fixedNumber} = this.state;  
+    return (  
+        <div>  
+          <h1>CallBack Test (show console.log)</h1>  
+          <h1>{number}</h1>  
+          <h2>바뀌지 않는 값: {fixedNumber}</h2>  
+  
+          <button  
+              onClick={() => {  
+                this.setState(prevState => {  
+                  return {  
+                    number: prevState.number + 1,  
+                  };  
+                });  
+  
+                this.setState(prevState => ({  
+                      number: prevState.number + 1,  
+                    }),  
+                    () => {  
+                      console.log('setState function is just called...');  
+                      console.log(this.state);  
+                    }  
+                );  
+              }}  
+          >  
+            +1 (Sync and Callback version)  
+          </button>  
+        </div>  
+    );  
+  }  
+};  
+  
+export default CallBack;
+```
+<br />
+
+#### 3.4.2 함수 컴포넌트에서 useState 사용하기
+---
+> 리엑트 16.8 버전 이전에서는 함수 컴포넌트에서 state를 사용할 수 없었습니다.
+> 16.9 이후부터 useState라는 함수를 사용하여 함수컴포넌트에서도 state를 사용할 수 있게 되었습니다.
+> 이 과정에서 <mark>Hooks</mark>를 사용하게 되었습니다.
+> useState는 Hooks의 한 종류로 사용되며 더 많은 Hooks의 종류는 8장에서 보도록 합니다.
+
+<br />
+
+##### 3.4.2.1 배열 비구조화 할당
+---
+> 🚦배열 비구조화 할당은 이전에 배운 객체 비구조화 할당과 비슷합니다.
+> 즉, 배열을 쉽게 추출해 줄 수 있게 합니다.
+
+아래와 같이 배열의 값 2개를 추출할 수 있습니다.
+```javascript
+const array = [1,2];
+const one = array[0];
+const two = array[1];
+```
+
+이를 배열 비 구조화 할당문을 사용하면 아래와 같이 값을 추출할 수 있습니다.
+```javascript
+const array = [1,2];
+const[one, two] = array;
+```
+
+<br />
+
+##### 3.4.2.2 useState 사용하기
+---
+> 💊 배열 비 구조화 할당문을 앞 서 알려드렸기 때문에 useState 함수를 쉽게 이해할 수 있습니다.
+> 새로운 컴포넌트에서 비구조화 할당문을 배워 봅시다.
+
+```javascript
+import {useState} from 'react';  
+  
+const Say = () => {  
+  const [message, setMessage] = useState('');  
+  const onClickEnter = () => setMessage('안녕하세요');  
+  const onClickLeave = () => setMessage('안녕히 가세요!');  
+  
+  return (  
+      <div>  
+        <button onClick={onClickEnter}>입장</button>  
+        <button onClick={onClickLeave}>퇴장</button>  
+        <h1>{message}</h1>  
+      </div>  
+  );  
+};  
+  
+export default Say;
+```
+
+useState의 인자에는 초깃값이 들어갑니다.
+state 초기 값은 객체형태를  넣어주어야 하지만 useState에서는 반드시 객체가 아니어도 상관없습니다.
+값의 형태는 자유입니다. 함수 호출 결과로 배열이 반환되는데요. 배열의 첫번 째 값은 현재 상태이고, 두번 째 값은 상태를 바꾸어주는 함수 입니다. 이 함수를 setter라고 합니다. 여기서 message, setMessage이름은 변경이 가능한 이름들 입니다.
+<br />
+
+##### 3.4.2.3 한 컴포넌트에서 useState 여러 번 사용하기
+---

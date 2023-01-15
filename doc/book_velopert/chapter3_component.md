@@ -92,6 +92,7 @@ dog.say(); // 흰둥이: 멍멍
 ### 3.2 첫 컴포넌트 생성
 ---
 파일 만들기 -> 코드 작성하기 -> 모듈 내보내기 및 불러오기
+
 <br />
 
 #### 3.1.1 소스 디렉터리에 MyComponent.js 파일 생성
@@ -173,10 +174,12 @@ export default App;
 ```
 
 import 문을 통해 작성한 MyComponent를 불러 옵니다.
+
 <br />
 
 ### 3.3 props
 ---
+
 <br />
 
 #### 3.3.1 JSX 내부에서 props 렌더링
@@ -189,6 +192,7 @@ const MyComponent = props => {
   
 export default MyComponent;
 ```
+
 <br />
 
 #### 3.3.2 컴포넌트를 사용할 때 props 값 지정하기
@@ -204,6 +208,7 @@ const App = () => {
 export default App;
 
 ```
+
 <br />
 
 #### props 기본값 설정: defaultProps
@@ -221,6 +226,7 @@ MyComponent.defaultProps = {
 };  
 export default MyComponent;
 ```
+
 <br />
 
 #### 3.3.4 태그 사이의 내용을 보여주는 children
@@ -255,6 +261,7 @@ MyComponent.defaultProps = {
   
 export default MyComponent
 ```
+
 <br />
 
 #### 3.3.5 비구조화 할당 문법을 통해 props 내부 값 추출하기
@@ -301,6 +308,7 @@ export default MyComponent;
 ```
 
 props 이름도 나오지 않았지만 이렇게 잘 사용할 수 있습니다. 앞으로는 비구조화 할당 문법을 사용합니다.
+
 <br />
 
 #### 3.3.6 propTypes를 통한 props 검증
@@ -333,6 +341,7 @@ const App = () => {
   
 export default App;
 ```
+
 <br />
 
 #### 3.3.6.1 isRequired를 사용하여 필수 propTypes 설정
@@ -380,6 +389,7 @@ const App = () => {
   
 export default App;
 ```
+
 <br />
 
 ##### 3.3.6.2 더 많은 PropTypes 종류
@@ -401,6 +411,7 @@ export default App;
 - any
 
 더 많은 정보는 https://github.com/facebook/prop-types 에서 볼 수 있습니다.
+
 <br />
 
 #### 3.3.7 클래스형 컴포넌트에서 props 사용하기
@@ -471,6 +482,7 @@ export default MyComponent;
 
 > **defaultProps와 propTypes는 꼭 사용해야 하나요?**
 > 그렇지는 않습니다. 선택사항입니다.
+
 <br />
 
 ### 3.4 state
@@ -478,6 +490,7 @@ export default MyComponent;
 state는 컴포넌트 내부에서 바뀔 수 있는 값을 의미합니다. props의 경우 부모 컴포넌트가 설정하는 값이며 컴포넌트 자신은 해당 props를 읽기 전용으로만 사용할 수 있습니다.
 리엑트에서는 두 가지 종류의 `state`가 있습니다.
 하나는 클래스형 컴포넌트가 지니고 있는 `state`이고 다른 하나는 함수 컴포넌트에서 `useState`입니다.
+
 <br />
 
 #### 3.4.1 클래스형 컴포넌트의 state
@@ -592,6 +605,7 @@ class StateTestWithoutConstructor extends Component {
   
 export default StateTestWithoutConstructor;
 ```
+
 <br />
 
 ##### 3.4.1.3 this.setState에 객체 대신 함수 인자 전달하기
@@ -657,6 +671,7 @@ class SyncSetStateWithArrowFunction extends Component {
   
 export default SyncSetStateWithArrowFunction;
 ```
+
 <br />
 
 ##### 3.4.1.4 this.setState가 끝난 후 특정 작업 실행하기
@@ -707,6 +722,7 @@ class CallBack extends Component {
   
 export default CallBack;
 ```
+
 <br />
 
 #### 3.4.2 함수 컴포넌트에서 useState 사용하기
@@ -715,6 +731,7 @@ export default CallBack;
 > 16.9 이후부터 useState라는 함수를 사용하여 함수컴포넌트에서도 state를 사용할 수 있게 되었습니다.
 > 이 과정에서 <mark>Hooks</mark>를 사용하게 되었습니다.
 > useState는 Hooks의 한 종류로 사용되며 더 많은 Hooks의 종류는 8장에서 보도록 합니다.
+
 <br />
 
 ##### 3.4.2.1 배열 비구조화 할당
@@ -734,6 +751,7 @@ const two = array[1];
 const array = [1,2];
 const[one, two] = array;
 ```
+
 <br />
 
 ##### 3.4.2.2 useState 사용하기
@@ -806,6 +824,7 @@ export default SayColor;
 
 코드 내에도 기술하였듯이 style 속성 값으로 들어가게 되면 신기하게도 key: value 형태로 들어가고 태그 사이의 값으로 들어가면 value 형태로 들어가는데... 가만 보아하니 {{value}} 형태가 있고 {value} 형태가 있는데...
 한번 테스트 해보자. webstorm에서 보면 이게 맞는 거 같다.
+
 <br />
 
 ### 3.5 state를 사용할 때 주의 사항
@@ -843,6 +862,7 @@ nextArray.map(item => (item.id === 1 ❓ {...item, value: false} : item)); // wh
 ```
 
 위에서 ...은 spread 연산자라고 하며 내용은 이후 차근차근 알아보겠습니다.
+
 <br />
 
 ### 3.6 정리

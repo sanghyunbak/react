@@ -761,3 +761,89 @@ state 초기 값은 객체형태를  넣어주어야 하지만 useState에서는
 
 ##### 3.4.2.3 한 컴포넌트에서 useState 여러 번 사용하기
 ---
+
+기존 입장, 퇴장 버튼 외에 컬러를 표현하는 부분도 useState를 사용해보자.
+아래와 같이 복수의 setState를 사용할 수 있다.
+```javascript
+import {useState} from 'react';  
+  
+const SayColor = () => {  
+  const [message, setMessage] = useState('');  
+  const onClickEnter = () => setMessage('안녕하세요');  
+  const onClickLeave = () => setMessage('안녕히 가세요!');  
+  
+  const [color, setColor] = useState('black');  
+  
+  return (  
+      <div>  
+        <button onClick={onClickEnter}>입장</button>  
+        <button onClick={onClickLeave}>퇴장</button>  
+        <button style={{'color': message}} onClick={()=> setMessage('Test')}>Test</button>  
+        <h1 style={{color}}>{message}</h1>  
+        <h1 style={{color}}>Color: {color}</h1>  
+        <h2> style attribute에 들어가면 color 변수는 color: {color} 형태로 들어가고...</h2>  
+        <h2> 태그사이 값으로 들어가면 {color} 형태로 들어가는데... 왜 그러지? </h2>  
+        <button style={{color: 'red'}} onClick={() => setColor('red')}>빨강  
+        </button>  
+        <button style={{color: 'green'}} onClick={() => setColor('green')}>초록  
+        </button>  
+        <button style={{color: 'blue'}} onClick={() => setColor('blue')}>파랑  
+        </button>  
+      </div>  
+  );  
+};  
+  
+export default SayColor;
+```
+
+코드 내에도 기술하였듯이 style 속성 값으로 들어가게 되면 신기하게도 key: value 형태로 들어가고 태그 사이의 값으로 들어가면 value 형태로 들어가는데... 가만 보아하니 {{value}} 형태가 있고 {value} 형태가 있는데...
+한번 테스트 해보자. webstorm에서 보면 이게 맞는 거 같다.
+<br />
+
+### 3.5 state를 사용할 때 주의 사항
+---
+> 💡**info**
+> state 변경 시에는 setState혹은 useState를 사용하고 직접적인 접근을 하면 안됩니다.
+> 아래와 같은 접근은 하시면 안됩니다.
+
+```javascript
+// in class component
+this.state.number = this.state.number + 1;
+this.state.array = this.array.push(2);
+this.state.object.value = 5;
+
+// in function component
+const [object, setObject] = useSafe({a: 1, b: 1});
+object.b = 2;
+```
+
+아래와 같이 사본을 만들어서 Setter를 통해 접근을 합니다.
+
+```javascript
+// object access
+const array = [
+{id: 1, value: true},
+{id: 2, value: true},
+{id: 3, value: false},
+];
+
+let nextArray = array.concat({id: 4}); // add new item
+nextArray.filter(item => item.id !== 2);
+nextArray.map(item => (item.id === 1 ❓ {...item, value: false} : item)); // when id:1 value set to false
+
+
+```
+
+위에서 ...은 spread 연산자라고 하며 내용은 이후 차근차근 알아보겠습니다.
+<br />
+
+### 3.6 정리
+---
+> 👍 Summary
+> 1. 이번 장에서는 component를 만들어서 내보내는 방법을 알아 보았습니다.
+> 2. props와 state를 사용하는 방법을 배워 보았습니다.
+> 3. 둘의 역할은 매우 다른데 props는 부모 컴포넌트가 설정한 값을 사용하고, state는 컴포넌트 자체 생성 값으로 컴포넌트 내부에서 값을 업데이 할 수 있습니다.
+> 4. props를 사용해도 유동적으로 활용할 수 있습니다. 앞으로 다뤄볼 일정관리 앱을 보면 부모 컴포넌트의 state값을 자식의 props로 넘겨주고 자식 컴포넌트에서 특정 이벤트가 발생할 경우 부모의 메서드를 호출하면 유동적으로 props값을 사용할 수 있습니다.
+> 5. state와 useState를 배워보았는데 앞으로는 useState를 사용할 것을 권장 합니다.(react에서도 Hooks사용을 권장)
+
+

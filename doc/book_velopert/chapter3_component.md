@@ -555,6 +555,7 @@ export default StateTest;
 ```
 
 현재 state 안에 fixedNumber값이 추가 되었습니다.
+
 <br />
 
 ##### 3.4.1.2 state를 constructor에서 꺼내기

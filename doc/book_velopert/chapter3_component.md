@@ -18,7 +18,7 @@ function App() {
   return <div>{name === "리엑트" ? <h1>리엑트 입니다.</h1> : null}</div>;  
 }
 ```
-위는 함수형 컴포넌트 입니다.
+위는 함수형 컴포넌트 입니다.(함수는 리턴 가능한 클래스로 봐도 될까❓)
 아래는 클래스형 컴포넌트 입니다.
 ```javascript
   
@@ -33,8 +33,8 @@ export default App
 ```
 
 두 컴포넌트의 역할은 동일합니다.
-차이점은 3가지 입니다.
-1. state 기능 및 라이프 사이클 기능을 사용할 수 있따.
+차이점은 2가지 입니다.
+1. state 기능 및 라이프 사이클 기능을 사용할 수 있다.
 2. 임의 메서드를 정의할 수 있다.
 
 > ### class 문법
@@ -75,6 +75,7 @@ dog.say(); // 흰둥이: 멍멍
 </blockquote>
 
 > 클래스형 컴포넌트에는 render 함수가 꼭 있어야 한다(상속❓, implements❓). 그리고 반환해야 하는 JSX 값을 가지고 있어야 한다.
+> 
 > **함수 컴포넌트의 장점**
 >  - 선언하기가 편하다.
 >  - 메모리 자원을 덜 사용한다.
@@ -82,16 +83,16 @@ dog.say(); // 흰둥이: 멍멍
 >
 > **함수 컴포넌트의 단점**
 > - state와 라이프사이클 API 사용이 불가능하다.
-    > 	- react 16.8 버전부터 Hooks 기능 도입을 통해 해결 됨
-    >
-    >  리엑트 공식 메뉴얼에서는 컴포넌트 작성 시 함수컴포넌트를 사용하고, Hooks를 사용하도록 권장 하고 있다.
-    > 	그렇지만 클래스형 컴포넌트가 사라지지는 않기 때문에 알아두기는 해야 한다.
+>> - react 16.8 버전부터 Hooks 기능 도입을 통해 해결 됨
+> 리엑트 공식 메뉴얼에서는 컴포넌트 작성 시 함수컴포넌트를 사용하고, Hooks를 사용하도록 권장 하고 있다.
+> 그렇지만 클래스형 컴포넌트가 사라지지는 않기 때문에 알아두기는 해야 한다.
 
 <br />
 
 ### 3.2 첫 컴포넌트 생성
 ---
 파일 만들기 -> 코드 작성하기 -> 모듈 내보내기 및 불러오기
+
 <br />
 
 #### 3.1.1 소스 디렉터리에 MyComponent.js 파일 생성
@@ -147,7 +148,7 @@ function WhiteDoc() {
 const whitedoc = WhiteDoc();  
 whitedoc.bark();
 ```
-
+⭐️ 함수 내 함수를 바로 정의 하지 않고 리턴 객체에 담아 줍니다.
 일반함수(function 키워드를 사용해서 정의한 함수)의 경우 자신이 종속된 객체를 this로 가리키며, 화살표함수는 자신이 종속된 인스턴스를 가리킵니다.
 
 </blockquote>
@@ -174,8 +175,13 @@ export default App;
 
 import 문을 통해 작성한 MyComponent를 불러 옵니다.
 
+<br />
+
 ### 3.3 props
 ---
+
+<br />
+
 #### 3.3.1 JSX 내부에서 props 렌더링
 ---
 컴포넌트 함수에서 파라미터로 받아서 사용할 수 있습니다.
@@ -186,6 +192,8 @@ const MyComponent = props => {
   
 export default MyComponent;
 ```
+
+<br />
 
 #### 3.3.2 컴포넌트를 사용할 때 props 값 지정하기
 ---
@@ -200,6 +208,8 @@ const App = () => {
 export default App;
 
 ```
+
+<br />
 
 #### props 기본값 설정: defaultProps
 ---
@@ -216,6 +226,8 @@ MyComponent.defaultProps = {
 };  
 export default MyComponent;
 ```
+
+<br />
 
 #### 3.3.4 태그 사이의 내용을 보여주는 children
 ---
@@ -250,6 +262,8 @@ MyComponent.defaultProps = {
 export default MyComponent
 ```
 
+<br />
+
 #### 3.3.5 비구조화 할당 문법을 통해 props 내부 값 추출하기
 ---
 props의 값을 호출하기 위해 props를 앞에 계속 붙여주고 있습니다.
@@ -274,7 +288,7 @@ export default MyComponent;
 ```
 
 
-구조 분해 문법이라고도 불린다. 함수 파라미터에서도 쓰일 수 있다.
+구조 분해 문법이라고도 불립니다. 함수 파라미터에서도 쓰일 수 있습니다.
 
 ```javascript
 const MyComponent = ({ name, children }) => {  
@@ -294,6 +308,8 @@ export default MyComponent;
 ```
 
 props 이름도 나오지 않았지만 이렇게 잘 사용할 수 있습니다. 앞으로는 비구조화 할당 문법을 사용합니다.
+
+<br />
 
 #### 3.3.6 propTypes를 통한 props 검증
 ---
@@ -325,6 +341,8 @@ const App = () => {
   
 export default App;
 ```
+
+<br />
 
 #### 3.3.6.1 isRequired를 사용하여 필수 propTypes 설정
 ---
@@ -372,6 +390,8 @@ const App = () => {
 export default App;
 ```
 
+<br />
+
 ##### 3.3.6.2 더 많은 PropTypes 종류
 ---
 - array
@@ -391,6 +411,8 @@ export default App;
 - any
 
 더 많은 정보는 https://github.com/facebook/prop-types 에서 볼 수 있습니다.
+
+<br />
 
 #### 3.3.7 클래스형 컴포넌트에서 props 사용하기
 ---
@@ -467,7 +489,9 @@ export default MyComponent;
 ---
 state는 컴포넌트 내부에서 바뀔 수 있는 값을 의미합니다. props의 경우 부모 컴포넌트가 설정하는 값이며 컴포넌트 자신은 해당 props를 읽기 전용으로만 사용할 수 있습니다.
 리엑트에서는 두 가지 종류의 `state`가 있습니다.
-하나는 클래스형 컴포넌트가 지니고 있는 `state`이고 다른 하나는 함수 컴포넌트에서 `useState`라는 함수를 사용하는 state
+하나는 클래스형 컴포넌트가 지니고 있는 `state`이고 다른 하나는 함수 컴포넌트에서 `useState`입니다.
+
+<br />
 
 #### 3.4.1 클래스형 컴포넌트의 state
 ---
@@ -505,7 +529,7 @@ export default ClassComponentState;
 ```
 > **Rule**
 > 1. constructor를 작성할 때는 반드시 super(props)를 호출해 주어야 합니다.
-     > 	1. 근데... constuctor를 안써주어도 됨
+>> - 근데... constuctor를 안써주어도 됨
 > 2. state는 객체 형식이어야 합니다.
 > 3. 참조는 `this.state`와 같이 this에서 변수를 참조할 수 있습니다.
 
@@ -544,6 +568,7 @@ export default StateTest;
 ```
 
 현재 state 안에 fixedNumber값이 추가 되었습니다.
+
 <br />
 
 ##### 3.4.1.2 state를 constructor에서 꺼내기
@@ -585,7 +610,6 @@ export default StateTestWithoutConstructor;
 
 ##### 3.4.1.3 this.setState에 객체 대신 함수 인자 전달하기
 ---
-
 
 setState인자로 객체를 넘겨 줄 경우 Async한 동작을 하게 되지만, 인자로 함수를 넘겨주는 경우 Sync한 동작을 수행하게 됩니다. 이때는 아래와 같은 형태의 코드가 됩니다.
 ```javascript
@@ -698,6 +722,7 @@ class CallBack extends Component {
   
 export default CallBack;
 ```
+
 <br />
 
 #### 3.4.2 함수 컴포넌트에서 useState 사용하기
@@ -731,7 +756,7 @@ const[one, two] = array;
 
 ##### 3.4.2.2 useState 사용하기
 ---
-> 💊 배열 비 구조화 할당문을 앞 서 알려드렸기 때문에 useState 함수를 쉽게 이해할 수 있습니다.
+> 💊 배열 비 구조화 할당문을 앞서 알려드렸기 때문에 useState 함수를 쉽게 이해할 수 있습니다.
 > 새로운 컴포넌트에서 비구조화 할당문을 배워 봅시다.
 
 ```javascript
@@ -757,6 +782,7 @@ export default Say;
 useState의 인자에는 초깃값이 들어갑니다.
 state 초기 값은 객체형태를  넣어주어야 하지만 useState에서는 반드시 객체가 아니어도 상관없습니다.
 값의 형태는 자유입니다. 함수 호출 결과로 배열이 반환되는데요. 배열의 첫번 째 값은 현재 상태이고, 두번 째 값은 상태를 바꾸어주는 함수 입니다. 이 함수를 setter라고 합니다. 여기서 message, setMessage이름은 변경이 가능한 이름들 입니다.
+
 <br />
 
 ##### 3.4.2.3 한 컴포넌트에서 useState 여러 번 사용하기
@@ -798,6 +824,7 @@ export default SayColor;
 
 코드 내에도 기술하였듯이 style 속성 값으로 들어가게 되면 신기하게도 key: value 형태로 들어가고 태그 사이의 값으로 들어가면 value 형태로 들어가는데... 가만 보아하니 {{value}} 형태가 있고 {value} 형태가 있는데...
 한번 테스트 해보자. webstorm에서 보면 이게 맞는 거 같다.
+
 <br />
 
 ### 3.5 state를 사용할 때 주의 사항
@@ -835,6 +862,7 @@ nextArray.map(item => (item.id === 1 ❓ {...item, value: false} : item)); // wh
 ```
 
 위에서 ...은 spread 연산자라고 하며 내용은 이후 차근차근 알아보겠습니다.
+
 <br />
 
 ### 3.6 정리

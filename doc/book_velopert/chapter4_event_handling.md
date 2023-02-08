@@ -93,7 +93,144 @@ export default EventPractice;
 ---
 App.js에서 위에서 만든 EventPractce.js를 불러와 렌더링 합니다.
 ```javascript
+import EventPractice from './EventPractice';  
+  
+const App = () => {  
+  return <EventPractice />  
+};  
+  
+export default App;
+```
+웹 브라우저에서 정상적으로 렌더링 되는 화면을 볼 수 있습니다.
 
+<br />
+
+#### 4.2.2 onChange 이벤트 핸들링하기
+---
+>##### 💡실습 순서
+>1. EventPractice 컴포넌트에 input요소를 렌더링 하는 코드를 넣습니다.
+>2. 해당 요소에 onChange 이벤트를 설정하는 코드를 작성합니다. 
+
+```javascript
+import React, {Component} from 'react';  
+  
+class EventPracticeOnChange extends Component {  
+  render() {  
+    return (  
+        <div>  
+          <h1>이벤트 연습</h1>  
+          <input  
+              type="text"  
+              name="message"  
+              placeholder="아무거나 입력해 보세요"  
+              onChange={  
+                (e) => {  
+                  console.log(e)  
+                }  
+              }  
+          />  
+        </div>  
+    );  
+  }  
+}  
+  
+export default EventPracticeOnChange;
+```
+
+콘솔에 기록되는 e 객체는 SyntheticEvent로 웹 브라우저의 네이티브 이벤트를 감싸는 객체 입니다.
+네이티브 이벤트와 인터페이스가 동일해서 HTML 이벤트를 다룰 때와 동일하게 다루면 됩니다.
+다른 점은 이벤트 종료 시 초기화가 되므로 정보를 참조할 수 없습니다. 
+예를 들어 0.5초 뒤에 참조하게 되면 모든 이벤트가 초기화가 되어 참조가 불가능해 집니다.
+비동기적으로 이벤트 객체를 참조할 일이 있다면 e.persist() 함수를 호출해 주어야 합니다. (v17부터는 안써도 됨...)
+
+```javascript
+import React, {Component} from 'react';  
+  
+class EventPracticeOnChange extends Component {  
+  render() {  
+    return (  
+        <div>  
+          <h1>이벤트 연습</h1>  
+          <input  
+              type="text"  
+              name="message"  
+              placeholder="아무거나 입력해 보세요"  
+              onChange={  
+                (e) => {  
+                  e.persist() // v17부터 아무 의미 없음  
+                  console.log(e);  
+                  setTimeout(()=>{  
+                    console.warn(e.type);  
+                    console.warn(e.target.value);  
+                      }  
+                  , 1);  
+                }  
+              }  
+          />  
+        </div>  
+    );  
+  }  
+}  
+  
+export default EventPracticeOnChange;
+```
+
+chrome에서 console.warn 함수를 통해 로깅을 수행하면 빨간 줄이 나지만 warn이라는 의미일 뿐 문법적인 오류는 없다.
+
+<br />
+
+##### 4.2.2.2 state에 input 값 담기
+##### 4.2.2.3 버튼을 누를 때 comment 값을 공백으로 설정
+---
+```javascript
+import React, {Component} from 'react';  
+  
+class EventPracticeWithState extends Component {  
+  state = {  
+    message: ''  
+  }  
+  render() {  
+    return (  
+        <div>  
+          <h1>이벤트 연습</h1>  
+          <input  
+              type="text"  
+              name="message"  
+              value={this.state.message}  
+              placeholder="아무거나 입력해 보세요"  
+              onChange={  
+                (e) => {  
+                  e.persist() // v17부터 아무 의미 없음  
+                  console.log(e);  
+                  setTimeout(()=>{  
+                        console.warn(e.type);  
+                        console.warn(e.target.value);  
+                      }  
+                      , 1);  
+                  this.setState({  
+                    message: e.target.value  
+                  })  
+                  // this.state.message = e.target.value;  
+                }  
+              }  
+          />  
+  
+          <button onClick={  
+            ()=> {  
+              alert(this.state.message)  
+              this.setState({  
+                message: ''  
+              })  
+            }  
+          }>  
+            확인  
+          </button>  
+        </div>  
+    );  
+  }  
+}  
+  
+export default EventPracticeWithState;
 ```
 
 <br />

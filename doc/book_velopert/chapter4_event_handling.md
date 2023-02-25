@@ -235,6 +235,13 @@ export default EventPracticeWithState;
 
 <br />
 
+#### 4.2.3 임의 메서드 만들기
+---
+4.1.1절의 주의 사항에서 <mark>"이벤트에서 실행할 자바스크립트 코드를 전달하는 것이 아니라, 함수 형태의 값을 전달합니다."</mark>라고 배웠습니다. 이 방법 대신에 함수를 미리 준비하여 전달하는 방법을 봅시다.
+
+
+<br />
+
 ### 4.3 함수 컴포넌트로 익히기
 ---
 >#### 💡Info
@@ -242,3 +249,117 @@ export default EventPracticeWithState;
 
 <br />
 
+아래 예제와 같이 함수 컴포넌트를 사용하여 예제를 구성할 수 있습니다.
+
+```javascript
+import React, {useState} from 'react';  
+  
+const EventPracticeUsingFunctionalMethod = () => {  
+  const [username, setUsername] = useState('');  
+  const [message, setMessage] = useState('');  
+  // useState function get inital state value and return current state and state change function  
+  const onChangeUsername = e => setUsername(e.target.value);  
+  const onChangeMessage = e => setMessage(e.target.value);  
+  // make another functino define... to get a parameter "e" ?  
+  // functional programming: assign a function to variable onChangexxx  const onClick = () => {  
+    alert(username + ':' + message);  
+    setUsername('');  
+    setMessage('');  
+  };  
+  const onKeyPress = e => {  
+    if (e.key === 'Enter') {  
+      onClick();  
+    }  
+  };  
+  
+  return (  
+      <div>  
+        <h1>두 개의 인풋 이벤트 연습 (using functional component)</h1>  
+        <input  
+            type="text"  
+            name="username"  
+            placeholder="사용자명"  
+            value={username}  
+            onChange={onChangeUsername}  
+        />  
+        <input  
+          type="text"  
+          name={"message"}  
+          placeholder={"아무거나 입력해 보세요"}  
+          value={message}  
+          onChange={onChangeMessage}  
+          onKeyPress={onKeyPress}  
+          />  
+        <button onClick={onClick}> 확인</button>  
+      </div>  
+  );  
+};  
+  
+export default EventPracticeUsingFunctionalMethod;
+```
+
+위 예젠는 `e.target.name`을 사용하지 않고 onChange 관련 함수 두 개를 따로 만들어 주었습니다. 
+인풋이 두 개 이면 상관 없지만 여러 개 일 경우 문제가 됩니다.
+아래와 같이 기존의 `form` state의 값을 `form` state에 저장하고 이벤트가 발생한 값만 덮어 씌우는 방식으로 예제를 작성할 수 있습니다.
+
+```python
+import {useState} from 'react';  
+  
+const EventPracticeFunctionalComponentForm = () => {  
+  const [form, setForm] = useState({  
+    username: '',  
+    message: '',  
+  });  
+  const {username, message} = form;  
+  const onChange = e => {  
+    const nextForm = {  
+      ...form, // 기존의 form 내용 TODO: ... operator의 의미를 잘 모르겠음... Iterable을 표현하는 것은 아닌거 같고  
+      [e.target.name]: e.target.value,  
+    };  
+    setForm(nextForm);  
+  };  
+  
+  // Reason why use Spread operator  
+  // let a = {1: "2", "2": 3};  // let b = {...a, "2": 2};  // let c = {a, "2": 2};  //  // result  // b = {1: "2", "2": 2};  // c = {{1: "2", "2": 3}, "2": 2};  
+  const onClick = () => {  
+    alert(username + ': ' + message);  
+    setForm({  
+      username: '',  
+      message: '',  
+    });  
+  };  
+  const onKeyPress = e => {  
+    if (e.key === 'Enter') {  
+      onClick();  
+    }  
+  };  
+  return (  
+      <div>  
+        <h1>이벤트 연습 form</h1>  
+        <input  
+            type={'text'}  
+            name={'username'}  
+            placeholder={'user name'}  
+            value={username}  
+            onChange={onChange}  
+        />  
+        <input  
+            type={'text'}  
+            name={'message'}  
+            placeholder={'Insert any key'}  
+            value={message}  
+            onChange={onChange}  
+            onKeyPress={onKeyPress}  
+        />  
+        <button onClick={onClick}>Confirm</button>  
+      </div>  
+  );  
+};  
+  
+export default EventPracticeFunctionalComponentForm;
+```
+
+### 4.4 정리
+---
+> 리엑트에서 이벤트를 다루는 방식은 기존의 javascript나 jQuery를 다루는 것과 유사합니다. 
+> useState에서 form 객체를 통해 여러 인풋 값의 상태를 관리하였는데요. 8장에서배울 useReducer와 커스텀 Hooks를 사용하면 이 작업을 더 편하게 할 수 있습니다.

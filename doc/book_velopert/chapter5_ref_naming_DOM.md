@@ -69,3 +69,54 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 </p>
 
 하지만 react에서는 state를 사용해서 위 작업을 수행할 수 있습니다. 
+
+이 장에서는 클래스형 컴포넌트의 경우만 살펴보겠습니다. 
+함수형 컴포넌트의 경우 Hooks와 같이 사용해야 하기 때문에 8장에서 Hooks를 배우면서 살펴볼 예정입니다.
+
+> #### 💡Info
+> 컴포넌트 만들기 -> input에 ref달기 -> 버튼 클릭 이벤트 발생 시마다 포커스 추가
+
+<br />
+
+#### 5.1.1 예제 컴포넌트 생성
+---
+```css
+.success {
+    background-color: lightgreen;
+}
+
+.failure {
+    background-color: lightcoral;
+}
+```
+
+<br />
+
+#### 5.1.3 situation that must Use DOM (Can't use state only)
+---
+- focus on specific input 
+- control scrol box 
+- draw canvas element
+
+<br />
+
+### 5.2 use ref
+---
+
+<br />
+
+#### 5.2.1 use callback function to use ref
+---
+use callback function to make ref is basic way. Send that information using ref to element set 'ref' via props that callback function get 'ref' as a parameter.
+
+
+<br />
+
+#### 5.2.3 createRef 
+---
+react version 16.3 support this feature
+look at the example
+
+```javascript
+
+```

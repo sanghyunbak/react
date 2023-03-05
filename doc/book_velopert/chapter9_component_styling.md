@@ -420,3 +420,41 @@ const MyComponent = () => {
   
 export default MyComponent;
 ```
+
+<br />
+
+#### 9.3.2 Using Sass
+---
+like scss, sass can use CSSModule.module.css -> CSSModule.module.scss (scss file extention)
+
+<br />
+
+#### 9.3.3 Using CSS Module, not CSS Module file
+----
+```scss
+:local wrapper {
+  /*styles*
+}
+
+:local {
+  .wrapper {
+  /*style*/
+  }
+}
+```
+
+<br />
+
+### 9.4 styled-components
+---
+CSS-in-js
+use styled-components library 
+
+<br />
+
+### 9.5 Summary
+---
+All styling is imporant.
+Choose library 
+- post-js
+- tailwind

@@ -72,9 +72,19 @@ export default TodoApp;
 ### 10.2 make up UI
 ---
 > 1. TodoTemplate
+> 	1. align display center and show app title
 > 2. TodoInsert
+> 	1. new item add
+> 	2. input state management use state
 > 3. TodoListItem
+> 	1. show indivisual item information
+> 	2. get todo object as a props, and show styles that depends state.
 > 4. TodoList
+> 	1. get todos array and convert multiple TodoListItem via built-in array function map.
+
+```🔑info
+src/components directory is traditional customary way store components.
+```
 
 <br />
 

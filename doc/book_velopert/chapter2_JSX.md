@@ -149,7 +149,7 @@ function myFunctionVar() {
   console.log(a)  
 }  
 console.log("😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎")  
-myFunctionVar() // var키워드는 scope이 합수 단위라 bye, bye 가 출력 됨  
+myFunctionVar() // var키워드는 scope이 함수 단위라 bye, bye 가 출력 됨  
   
 function myFunctionLet() {  
   let a = 'hello';  

@@ -219,8 +219,24 @@ export default App;
 #### 2.4.5 undefined를 렌더링하지 않기
 ---
 undefined를 렌더링 하게 되면 아래와 같은 오류가 발생됩니다.
+
+```javascript
+function App() {  
+  const name = undefined;  
+  return name;  
+}  
+  
+export default App;
+
+```
+
 `App(...): Nothing was returned from render. This usually means a return statement is missing. Or, to render nothing, return null.`
+
+<br />
+
 어떤 값이 undefined일 수 있다면 OR(||) 연산자를 사용하면 해당 값이 undefined일 때 사용할 값을 지정할 수 있으므로 간단하게 오류를 방지할 수 있습니다.
+
+<br />
 
 ```javascript
 function App() {  
@@ -229,18 +245,35 @@ function App() {
 }  
   
 export default App;
-
 ```
 
 반면 JSX 내부에서 undefined를 렌더링 하는 것은 괜찮습니다.
-```javascript
+
+<br />
+
+```jsx
+import './Apps.css'
+
 function App() {  
   const name = undefined;  
-  return name || '값이 undefined 입니다.';  
+  return <div>{name}</div>;  
 }  
   
 export default App;
 ```
+
+<br />
+```jsx
+import './App.css'
+
+function App() {
+  const name = undefined;
+  return <div> {name || '리엑트'} </div>;
+}
+
+export default App;
+```
+
 
 #### 2.4.6 inline styling
 ---

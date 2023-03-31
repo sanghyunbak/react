@@ -26,8 +26,8 @@ angula, Backbone.js, Derby.js, Ember.js, Ext.js, Knockback.js, Sammy.js, PureMVC
     <div class="likes">1</div>  
 </div>
 ```
-`link`의 값을 1이 아닌 2로 변경한다고 생각해 보자.
-어플리케이션에서는 해당 tag를 찾아야 하고(post-1 id를 갖는 div 내부의 linkes 클래스를 갖는 div의 값을 변경) 이는 어플리케이션의 규모가 커질수록 복잡해 진다.
+`likes`의 값을 1이 아닌 2로 변경한다고 생각해 보자.
+어플리케이션에서는 해당 tag를 찾아야 하고(post-1 id를 갖는 div 내부의 likes 클래스를 갖는 div의 값을 변경) 이는 어플리케이션의 규모가 커질수록 복잡해 진다.
 페이스북 개발 팀은 <mark>기존 뷰를 날려버리고</mark> 새로 렌더링을 하는 방식을 고안했습니다.
 이를 통해 어떤 데이터가 변할 때 마다 어떤 변화를 줘야할 지를 고민하지 않게 되었습니다.
 이것이... 과연 더 효율적일까요❓

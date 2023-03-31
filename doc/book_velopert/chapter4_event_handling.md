@@ -54,6 +54,9 @@
 - Image
 - Animation
 - Transition
+
+<br />
+
   위의 이벤트가 전부는 아니며 나머지 이벤트는 리엑트 메뉴얼 [리엑트 메뉴얼](http://facebook.github.io/react/docs/events.html)을 찹고 합니다.
 
 <br />
@@ -298,7 +301,7 @@ const EventPracticeUsingFunctionalMethod = () => {
 export default EventPracticeUsingFunctionalMethod;
 ```
 
-위 예젠는 `e.target.name`을 사용하지 않고 onChange 관련 함수 두 개를 따로 만들어 주었습니다. 
+위 예제는 `e.target.name`을 사용하지 않고 onChange 관련 함수 두 개를 따로 만들어 주었습니다. 
 인풋이 두 개 이면 상관 없지만 여러 개 일 경우 문제가 됩니다.
 아래와 같이 기존의 `form` state의 값을 `form` state에 저장하고 이벤트가 발생한 값만 덮어 씌우는 방식으로 예제를 작성할 수 있습니다.
 

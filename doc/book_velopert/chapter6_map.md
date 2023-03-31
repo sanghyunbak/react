@@ -229,6 +229,6 @@ export default MyComponent;
 
 ### 6.5 Summary
 ---
-> - This chapter we learn repated data rendering feature, and manage dynamic array .
+> - This chapter we learn repeated data rendering feature, and manage dynamic array .
 > - Be careful when component array rendering set key value.
 > - If you modify array type of state value, use map, filter, concat not directry access state.

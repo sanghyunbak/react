@@ -49,7 +49,7 @@ body {
 
 > TodoApp.js
 
-```javascript
+```jsx
 import React from 'react';  
 import * as PropTypes from 'prop-types';  
   
@@ -101,7 +101,7 @@ this stage we concentrate build a architecture not implements feature.
 4. add insert feature
 5. use icon component
 
-```javascript
+```jsx
 import React from 'react';  
 import './TodoTemplate.scss';  
   

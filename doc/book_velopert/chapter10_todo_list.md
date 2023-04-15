@@ -467,6 +467,7 @@ export default TodoInsert;
 > Use react's developer tool
 > in component tab, select `TodoInsert` use can see Hooks state
 
+![](./resources/react_tool.png)
 
 ![](./resources/developer_tool.png)
 

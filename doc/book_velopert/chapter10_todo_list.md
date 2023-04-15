@@ -314,3 +314,159 @@ export default TodoApp;
 
 ### 10.3 Implements feature
 ---
+
+> 💡 info
+> Let's make todo application works!
+
+
+<br />
+
+#### 10.3.1 use `todos` state in App
+---
+> 💡 info
+> all todo list are managed in `TodoApp` component.
+> use `useState` to define `todos` state take it over to `TodoList` props.
+
+<br />
+
+
+> TodoApp.jsx
+```jsx
+import React, {useCallback, useRef, useState} from 'react';  
+import TodoTemplate from './TodoTemplate';  
+import TodoInsert from './TodoInsert';  
+import TodoList from './TodoList';  
+  
+const TodoApp = () => {  
+  const [todos, setTodos] = useState([  
+    {      id: 1,  
+      text: "Let's check it out react basic",  
+      checked: true,  
+    },    {      id: 2,  
+      text: "Let's styling component",  
+      checked: true,  
+    },    {      id: 3,  
+      text: "create todo app",  
+      checked: false,  
+    }  ]);  
+
+  return (  
+      <TodoTemplate>        
+        <TodoInsert />  
+        <TodoList todos={todos}/>  
+      </TodoTemplate>  );  
+};  
+  
+export default TodoApp;
+```
+
+> TodoList.jsx
+
+```jsx
+import React from 'react';  
+import TodoListItem from './TodoListItem';  
+  
+const TodoList = ({todos, onRemove, onToggle}) => {  
+  return (  
+      <div className='TodoList'>  
+        {todos.map(todo => (<TodoListItem key={todo.id} />))}  
+      </div>);  
+};  
+  
+export default TodoList;
+```
+
+> TodoListItem.jsx
+
+```jsx
+import React from 'react';  
+import {  
+  MdCheckBox,  
+  MdCheckBoxOutlineBlank,  
+  MdRemoveCircleOutline,  
+} from 'react-icons/md';  
+import cn from 'classnames';  
+import './TodoListItem.scss';  
+  
+const TodoListItem = ({ todo }) => {  
+  const { text, checked } = todo;  
+   
+  return (  
+      <div className={"TodoListItem"}>  
+        <div className={cn("checkbox", {checked})}>  
+          {checked ? <MdCheckBox />: <MdCheckBoxOutlineBlank />}  
+          <div className="text">{ text }</div>  
+        </div>        
+        <div className="remove">  
+          <MdRemoveCircleOutline />
+	    </div>
+	  </div>  
+  );  
+};  
+  
+export default TodoListItem;
+```
+
+<br />
+
+todos array contain objects that has a unique id, contents, whether completed.
+`TodoList.jsx` use built-in function `map` for rendering `TodoListItem`.
+Last chapter we said `key` props is needed to use `map`.
+now you can see the `TodoApp` show all items correctly.
+
+<br />
+
+
+#### 10.3.2 Implement Add function
+----
+> **💡 info**
+> To mange input value in `input` box, use `useState` to store value.
+> Additionally `onChange` function needed.
+> And use `useCallback` Hooks to re-use function when re-rendering.
+
+
+> TodoInsert.jsx
+```jsx
+import {MdAdd} from 'react-icons/md' // md: material design  
+import React, {useCallback, useState} from 'react';  
+import './TodoInsert.scss'  
+  
+const TodoInsert = ({onInsert}) => {  
+  const [value, setValue] = useState('');  
+  
+  const onChange = useCallback(  
+      (e) => {  
+        setValue(e.target.value)  
+      },      [],  );  
+  const onSubmit = useCallback(  
+      e => {  
+        onInsert(value);  
+        setValue(''); // initialize value  
+  
+        // submit event make browser's refresh        // so call this function to prevent this        e.preventDefault();  
+      },      [onInsert, value],  
+  );  
+  return (  
+      <form className={"TodoInsert"} onSubmit={onSubmit}>  
+        <input            
+            placeholder={'Insert todo job'}  
+            value={value}  
+            onChange={onChange}  
+            style={{color: 'black'}}  
+        />        
+        <button type={"submit"}>  
+          <MdAdd />        
+	    </button>
+	  </form>  );  
+};  
+  
+export default TodoInsert;
+```
+
+> **💡 info**
+> Use react's developer tool
+> in component tab, select `TodoInsert` use can see Hooks state
+
+
+![[resources/developer_tool.png]]
+

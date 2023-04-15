@@ -468,5 +468,5 @@ export default TodoInsert;
 > in component tab, select `TodoInsert` use can see Hooks state
 
 
-![[./resources/developer_tool.png]]
+![](./resources/developer_tool.png)
 

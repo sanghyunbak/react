@@ -3,6 +3,7 @@
 ---
 
 >**💡 info** 
+>
 >You can make up project only one page or multiple pages.
 >Blog is consist of multiple pages.
 >- writing page: writing new post
@@ -12,12 +13,14 @@
 
 <br />
 
-> **💡 React Router**
+> **💡 React Router** 
+> 
 > Oldest library that about react routing and the most used.
 
 <br />
 
 > **💡 Next.js**
+> 
 > Framework in React project like `Create React Appp`, has a lot of feature: setting project, routing, optimization, globalization, server-side-rendering etc. Based on file path.
 > Alternatives of React Router
 > - react-location, rakkas etc
